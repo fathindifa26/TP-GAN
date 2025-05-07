@@ -6,8 +6,8 @@ from PIL import Image
 import numpy as np
 
 IMG_DIR = 'dataset/128x128'
-TRAIN_LIST_PATH = 'train_list.txt'
-FRONTAL_LIST_PATH = 'frontal_list.txt'
+TRAIN_LIST_PATH = 'train_list_old.txt'
+FRONTAL_LIST_PATH = 'frontal_list_old.txt'
 
 # Threshold konfigurasi
 ANGLE_THRESHOLD = 3
