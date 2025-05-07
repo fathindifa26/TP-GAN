@@ -1,4 +1,4 @@
-# data.py
+# data/data.py
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 from PIL import Image
