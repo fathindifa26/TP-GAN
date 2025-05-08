@@ -4,9 +4,11 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import torch
 
-# Load daftar path dari train_list_old.txt
+# Load daftar path dari train_list.txt
 with open('train_list.txt', 'r') as f:
     img_list = [line.strip() for line in f.readlines()]
+
+print(img_list[:10])
 
 # Buat dataset dan dataloader
 dataset = TrainDataset(img_list)

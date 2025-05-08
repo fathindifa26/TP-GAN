@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="42958db2-6f23-44a7-8e36-954da3a7b91c" name="remote">
+        <fileTransfer rootFolder="/home/comtrue/PycharmProjects" accessType="SFTP" host="211.192.100.1" port="22222" sshConfigId="9790dde4-4a4d-4c7c-a66d-9510196fea51" sshConfig="comtrue@211.192.100.1:22222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

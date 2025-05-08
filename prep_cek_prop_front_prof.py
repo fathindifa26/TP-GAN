@@ -7,10 +7,10 @@ def extract_identity(path):
     return identity
 
 # Baca file
-with open("frontal_list_old.txt") as f:
+with open("frontal_list.txt") as f:
     frontal_files = [line.strip() for line in f.readlines()]
 
-with open("train_list_old.txt") as f:
+with open("train_list.txt") as f:
     profile_files = [line.strip() for line in f.readlines()]
 
 # Hitung jumlah per identitas
