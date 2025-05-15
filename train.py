@@ -13,6 +13,10 @@ from utils.utils import *
 import models.feature_extract_network
 import importlib
 
+if not torch.cuda.is_available():
+    torch.Tensor.cuda = lambda self, *args, **kwargs: self
+    torch.nn.Module.cuda = lambda self, *args, **kwargs: self
+
 test_time = False
 
 if __name__ == "__main__":
