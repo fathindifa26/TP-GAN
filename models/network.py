@@ -262,3 +262,39 @@ class Discriminator(nn.Module):
     def forward(self,x):
         return self.model(x)
 
+class GeneratorStudent(Generator):
+    """
+    Versi 'ringan' dari Generator TP-GAN:
+    - Kita pass fm_mult < 1 ke semua LocalPathway dan GlobalPathway
+    - Sisanya persis sama jadi dipakai loss distillation di train.py
+    """
+    def __init__(self,
+                 zdim,
+                 num_classes,
+                 use_batchnorm=True,
+                 use_residual_block=True,
+                 fm_mult=0.75):
+        super(GeneratorStudent, self).__init__(zdim, num_classes,
+                                               use_batchnorm, use_residual_block)
+        # override tiap pathway dengan versi ringan
+        self.local_pathway_left_eye  = LocalPathway(use_batchnorm=use_batchnorm,
+                                                    feature_layer_dim=64,
+                                                    fm_mult=fm_mult)
+        self.local_pathway_right_eye = LocalPathway(use_batchnorm=use_batchnorm,
+                                                    feature_layer_dim=64,
+                                                    fm_mult=fm_mult)
+        self.local_pathway_nose      = LocalPathway(use_batchnorm=use_batchnorm,
+                                                    feature_layer_dim=64,
+                                                    fm_mult=fm_mult)
+        self.local_pathway_mouth     = LocalPathway(use_batchnorm=use_batchnorm,
+                                                    feature_layer_dim=64,
+                                                    fm_mult=fm_mult)
+
+        self.global_pathway = GlobalPathway(zdim,
+                                            local_feature_layer_dim=64,
+                                            use_batchnorm=use_batchnorm,
+                                            use_residual_block=use_residual_block,
+                                            fm_mult=fm_mult)
+        # fuser & predictor tidak berubah
+        self.local_fuser     = LocalFuser()
+        self.feature_predict = FeaturePredict(num_classes)
