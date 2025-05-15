@@ -1,7 +1,7 @@
-# feature_extract_network.py
+# models/feature_extract_network.py
 import torch.nn as nn
-from feature_extract_layers import *
-from MobileNetV2 import MobileNetV2
+from .feature_extract_layers import *
+from .MobileNetV2 import MobileNetV2
 import copy
 
 class ResNet( nn.Module ):

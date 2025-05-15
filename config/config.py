@@ -1,5 +1,5 @@
 train =  {}
-train['img_list'] = './img.list'
+train['img_list'] = './train_list.txt'
 train['learning_rate'] = 1e-4
 train['num_epochs'] = 200
 train['batch_size'] = 50

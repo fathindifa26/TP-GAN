@@ -1,7 +1,7 @@
 # train.py
 import torch
 from torchvision import transforms
-import config
+import config.config as config
 from data.data import TrainDataset
 import numpy as np
 from skimage.io import imsave
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 print("preprocess time : ", t_pre - tt)
                 tt = t_pre
             for k in batch:
-                batch[k] = Variable(batch[k].cuda(async = True), requires_grad = False )
+                batch[k] = batch[k] = Variable(batch[k].cuda(non_blocking=True), requires_grad=False)
                 z = Variable(torch.FloatTensor(np.random.uniform(-1, 1, (len(batch['img']), config.G['zdim']))).cuda())
                 if test_time:
                     t_mv_to_cuda = time.time()
@@ -100,7 +100,7 @@ if __name__ == "__main__":
                 adv_D_loss = - torch.mean(D(batch['img_frontal'])) + torch.mean(D(img128_fake.detach()))
                 # compute the gradient penalty
                 alpha = torch.rand(batch['img_frontal'].shape[0], 1, 1, 1).expand_as(
-                    batch['img_frontal']).pin_memory().cuda(async = True)
+                    batch['img_frontal']).pin_memory().cuda(non_blocking=True)
                 interpolated_x = Variable(alpha * img128_fake.detach().data + (1.0 - alpha) * batch['img_frontal'].data,
                                           requires_grad=True)
                 out = D(interpolated_x)
