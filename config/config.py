@@ -1,3 +1,4 @@
+# config/config.py
 train =  {}
 train['img_list'] = './train_list.txt'
 train['learning_rate'] = 1e-4
@@ -31,4 +32,4 @@ loss['weight_total_varation'] = 1e-3
 loss['weight_cross_entropy'] = 1e1
 
 feature_extract_model = {}
-feature_extract_model['resume'] =  'config'
+feature_extract_model['resume'] =  'save/feature_extractor_models/mobilenetv2'
