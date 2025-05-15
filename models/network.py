@@ -1,6 +1,6 @@
-# network.py
+# models/network.py
 import torch
-from layers import *
+from .layers import *
 from utils.utils import elementwise_mult_cast_int
 
 emci = elementwise_mult_cast_int
