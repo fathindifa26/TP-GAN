@@ -1,5 +1,4 @@
-""" utils.py
-"""
+# utils/utils.py
 
 import os
 import torch
@@ -12,7 +11,7 @@ import warnings
 import PIL.Image as Image
 import copy
 
-    
+
 def elementwise_mult_cast_int(list_x , scalar):
     return [int(v*scalar) for v in list_x ]
 
@@ -49,20 +48,24 @@ def resume_optimizer(optimizer,model, path ):
     warnings.warn("resume model file not found , training starts without resuming")
     return -1
 
-def resume_model(model,path ,strict= True):
+def resume_model(model, path, strict=True):
     "return the epoch"
     if type(model).__name__ == name_dataparallel:
         model = model.module
-    for i in reversed( range(1000) ):
-        p = "{}/{}_epoch{}.pth".format( path,type(model).__name__,i )
-        if os.path.exists( p ):
-            model.load_state_dict(  torch.load( p ) , strict = strict)
+    for i in reversed(range(1000)):
+        p = f"{path}/{type(model).__name__}_epoch{i}.pth"
+        if os.path.exists(p):
+            # jika ada GPU, load normal; kalau CPU-only, pakai map_location
+            if torch.cuda.is_available():
+                state = torch.load(p)
+            else:
+                state = torch.load(p, map_location=torch.device('cpu'))
+            model.load_state_dict(state, strict=strict)
             return i
-
     warnings.warn("resume model file not found , training starts without resuming")
     return -1
 
-    
+
 def set_requires_grad(module , b ):
     for parm in module.parameters():
         parm.requires_grad = b

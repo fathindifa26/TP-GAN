@@ -59,7 +59,7 @@ if __name__ == "__main__":
     kwargs.pop('model_name')
     feature_extract_model = eval('feature_extract_network.' + model_name)(**kwargs)
 
-    resume_model(feature_extract_model, config.feature_extract_model['resume'], strict=True)
+    resume_model(feature_extract_model, config.feature_extract_model['resume'], strict=False)
     feature_extract_model = torch.nn.DataParallel(feature_extract_model).cuda()
 
     l1_loss = torch.nn.L1Loss().cuda()
@@ -197,12 +197,17 @@ if __name__ == "__main__":
                     new_t = time.time()
                     print(
                         "epoch {} , step {} / {} , adv_D_loss {:.3f} , gradient_penalty_loss {:.3f} , G_loss {:.3f} , pixelwise_loss {:.3f} , pixelwise_local_loss {:.3f} , symmetry_loss {:.3f} , adv_G_loss {:.3f} , identity_preserving_loss {:.3f} , total_variation_loss {:.3f} , cross_entropy_loss {:.3f} ,  {:.1f} imgs/s".format(
-                            epoch, step, len(dataloader), adv_D_loss.data.cpu().numpy()[0],
-                            gp_loss.data.cpu().numpy()[0], L_G.data.cpu().numpy()[0],
-                            pixelwise_loss.data.cpu().numpy()[0], pixelwise_local_loss.data.cpu().numpy()[0],
-                            symmetry_loss.data.cpu().numpy()[0], adv_G_loss.data.cpu().numpy()[0],
-                            ip_loss.data.cpu().numpy()[0], tv_loss.data.cpu().numpy()[0],
-                            cross_entropy_loss.data.cpu().numpy()[0],
+                            epoch, step, len(dataloader),
+                            adv_D_loss.item(),
+                            gp_loss.item(),
+                            L_G.item(),
+                            pixelwise_loss.item(),
+                            pixelwise_local_loss.item(),
+                            symmetry_loss.item(),
+                            adv_G_loss.item(),
+                            ip_loss.item(),
+                            tv_loss.item(),
+                            cross_entropy_loss.item(),
                             config.train['log_step'] * config.train['batch_size'] / (new_t - t)))
                     tb.add_image_grid("grid/predict", 4, img128_fake.data.float() / 2.0 + 0.5,
                                       epoch * len(dataloader) + step, 'train')
