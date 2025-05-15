@@ -1,7 +1,7 @@
 # train_distill.py
 import torch
 from torchvision import transforms
-import config.config as config
+import config.config_distillation as config
 from data.data import TrainDataset
 import numpy as np
 from skimage.io import imsave
@@ -74,14 +74,15 @@ if __name__ == "__main__":
     tb = TensorBoardX(config_filename_list=["config.py"])
 
     # --- Feature extractor (frozen) ---
-    pretrain_cfg = importlib.import_module(
-        '.'.join([*config.feature_extract_model['resume'].split('/'), 'pretrain_config'])
-    )
-    stem = pretrain_cfg.stem.copy()
-    stem.pop('model_name')
-    feat = getattr(feature_extract_network, pretrain_cfg.stem['model_name'])(**stem)
+    model_name = config.feature_extract_model['model_name']
+    # Ambil semua kwargs lain yang diperlukan untuk inisialisasi
+    fe_kwargs = config.feature_extract_model.get('kwargs', {})
+    # Instansiasi
+    feat = getattr(feature_extract_network, model_name)(**fe_kwargs)
+    # Load checkpoint (folder atau file .pth)
     resume_model(feat, config.feature_extract_model['resume'], strict=False)
     feat = torch.nn.DataParallel(feat).cuda()
+    # Freeze
     for p in feat.parameters():
         p.requires_grad = False
 

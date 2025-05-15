@@ -1,6 +1,5 @@
 # models/MobileNetV2.py
 #borrowed from https://github.com/tonylins/pytorch-mobilenet-v2
-# models/MobileNetV2.py
 # adjusted to be compatible with original train.py kwargs
 
 import torch

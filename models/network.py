@@ -290,11 +290,6 @@ class GeneratorStudent(Generator):
                                                     feature_layer_dim=64,
                                                     fm_mult=fm_mult)
 
-        self.global_pathway = GlobalPathway(zdim,
-                                            local_feature_layer_dim=64,
-                                            use_batchnorm=use_batchnorm,
-                                            use_residual_block=use_residual_block,
-                                            fm_mult=fm_mult)
         # fuser & predictor tidak berubah
         self.local_fuser     = LocalFuser()
         self.feature_predict = FeaturePredict(num_classes)
