@@ -10,12 +10,13 @@ from torch.autograd import Variable
 import time
 from logs.log import TensorBoardX
 from utils.utils import *
-import models.feature_extract_network
+from models import feature_extract_network
 import importlib
 
 if not torch.cuda.is_available():
     torch.Tensor.cuda = lambda self, *args, **kwargs: self
     torch.nn.Module.cuda = lambda self, *args, **kwargs: self
+    torch.Tensor.pin_memory = lambda self: self
 
 test_time = False
 
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     tb = TensorBoardX(config_filename_list=["config.py"])
 
     # d = torch.load('./feature_extract_models/resnet18_finetune_MultiPie_epoch19.pth')
-    # feature_extract_model = resnet.resnet18()
+    # feature_extract_model = resnet.mobilenetv2()
     # feature_extract_model.fc1 = torch.nn.Linear( 512*3*3 , 512 )
     pretrain_config = importlib.import_module(
         '.'.join([*config.feature_extract_model['resume'].split('/'), 'pretrain_config']))

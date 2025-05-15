@@ -1,8 +1,16 @@
 # pretrain.py
+import torch
+from torch.autograd import Variable
 import torch.nn as nn
+import torchvision
+import models.feature_extract_network
+import numpy as np
 from logs.log import TensorBoardX
-from config import pretrain_config as config
+from math import pi
+from utils.utils import *
+import config.pretrain_config as config
 from data.data import PretrainDataset
+import copy
 
 
 def compute_loss(predicts, labels):

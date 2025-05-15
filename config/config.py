@@ -31,4 +31,4 @@ loss['weight_total_varation'] = 1e-3
 loss['weight_cross_entropy'] = 1e1
 
 feature_extract_model = {}
-feature_extract_model['resume'] =  'save/feature_extract_model/resnet18/try_1'
+feature_extract_model['resume'] =  'config'

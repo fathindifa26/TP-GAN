@@ -1,4 +1,4 @@
-# pretrain_config
+# config/pretrain_config.py
 test_time = False
 
 num_classes = 347
@@ -14,7 +14,7 @@ train['log_step'] = 100
 train['optimizer'] = 'SGD'
 train['learning_rate'] = 1e-1
 train['momentum'] = 0.9
-train['nesterov'] = True 
+train['nesterov'] = True
 train['warmup_length'] = 0
 train['learning_rate_decay'] = 1.0
 train['auto_adjust_lr'] = False
@@ -31,12 +31,12 @@ train['lr_scheduler_milestones'] = [10,20,30]
 
 
 stem = {}
-model_name = ['mobilenetv2' , 'resnet18' ]
-stem['model_name'] = 'mobilenetv2'
+model_name = ['MobileNetV2' , 'resnet18' ]
+stem['model_name'] = 'MobileNetV2'
 stem['num_classes'] = num_classes
 
 assert stem['model_name'] in model_name
-if stem['model_name'] == 'mobilenetv2':
+if stem['model_name'] == 'MobileNetV2':
     stem['fm_mult'] = 1.0
     stem['dropout'] = 0.5
     stem['input_size'] = 128
