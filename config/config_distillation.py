@@ -32,4 +32,4 @@ feature_extract_model = {}
 # ini harus folder yang berisi:
 #   - checkpoint(.pth)
 #   - pretrain_config.py
-feature_extract_model['resume'] = 'save/feature_extractor_models/mobilenetv2'
+feature_extract_model['resume'] = 'feature_extractor_models/lightcnnv4'

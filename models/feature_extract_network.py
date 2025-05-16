@@ -2,6 +2,7 @@
 import torch.nn as nn
 from .feature_extract_layers import *
 from .MobileNetV2 import MobileNetV2
+from .LightCNN_V4 import network as lightcnn_v4_net, resblock_v1
 import copy
 
 class ResNet( nn.Module ):
@@ -81,6 +82,9 @@ def resnet18( fm_mult = 1.0 , **kwargs ):
 def mobilenetv2(  **kwargs ):
     return MobileNetV2(  **kwargs )
 
+def lightcnn_v4(**kwargs):
+    # V4 menerima 3-channel langsung
+    return lightcnn_v4_net(resblock_v1, [1,2,3,4], **kwargs)
 
 
     

@@ -1,4 +1,4 @@
-# feature_extract_layers.py
+# models/feature_extract_layers.py
 #wrappers for convenience
 import torch.nn as nn
 from torch.nn.init import xavier_normal , kaiming_normal
