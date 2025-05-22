@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm
 
 identity_path = "identity_CelebA.txt"         # file dari CelebA
-img_dir = "dataset/img_align_celeba"                  # folder asli hasil ekstrak
+img_dir = "dataset/datasets/img_align_celeba"  # folder asli hasil ekstrak
 output_dir = "dataset/128x128"                # folder output hasil rename
 
 os.makedirs(output_dir, exist_ok=True)
