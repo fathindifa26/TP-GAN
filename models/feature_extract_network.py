@@ -82,10 +82,10 @@ def resnet18( fm_mult = 1.0 , **kwargs ):
 def mobilenetv2(  **kwargs ):
     return MobileNetV2(  **kwargs )
 
-def lightcnn_v4(**kwargs):
+def LightCNN_V4(*args, **kwargs):
     # V4 menerima 3-channel langsung
-    return lightcnn_v4_net(resblock_v1, [1,2,3,4], **kwargs)
-
+    return lightcnn_v4_net(resblock_v1, [1,2,3,4])
+lightcnn_v4 = LightCNN_V4
 
     
 

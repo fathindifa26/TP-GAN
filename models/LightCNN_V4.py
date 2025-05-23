@@ -89,9 +89,12 @@ class network(nn.Module):
         x = torch.flatten(x, 1)
         fc = self.fc(x)
 
-        return fc
+        return fc, fc
 
 
 def LightCNN_V4(cfg):
     model = network(resblock_v1, [1, 2, 3, 4])
     return model
+
+# Alias agar lowercase juga dikenali
+lightcnn_v4 = LightCNN_V4
